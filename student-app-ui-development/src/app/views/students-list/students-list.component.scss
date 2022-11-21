@@ -1,0 +1,44 @@
+.profile-navbar{
+    background: #30384c;
+    .profile-tabs{
+        display: flex;
+        align-items: center;
+        .tabs-holder{
+            display: flex;
+            margin-bottom: 0;
+            .tab{
+                display: inline-block;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 70px;
+                padding: 0 15px;
+                cursor: pointer;
+                a{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    width: 100%;
+                    text-transform: uppercase;
+                    border-bottom: 2px solid transparent;
+                    transition: 200ms ease-out;
+                    font-size: 13px;
+                    color: #fff;
+                    text-decoration: none;
+                    &:hover{
+                        border-bottom: 2px solid #fab63f;
+                        transition: 200ms ease-in;
+                    }
+                    &.selected{
+                        border-bottom: 2px solid #fab63f;
+                    }
+                }
+            }
+        }
+    }
+}
+.align-center{
+    text-align: center;
+}

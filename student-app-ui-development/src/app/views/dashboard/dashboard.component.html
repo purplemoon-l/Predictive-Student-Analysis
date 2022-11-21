@@ -1,0 +1,152 @@
+<div class="row profile-navbar">
+    <div class="col-md-8 ml-auto">
+      <div class="profile-tabs">
+        <ul class="tabs-holder">
+          <li class="tab"><a href="#"  class="selected">Dashboard</a></li>
+          <li class="tab"><a href="#" [routerLink]="['/app/students-list',role, instituteId]">Students List</a></li>
+          <!-- <li class="tab"><a href="#" [routerLink]="['/app/profile']">Profile</a></li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+
+<!-- <div class="card-row">
+  <div class="container-fluid">
+    <div class="row card-row-inside">
+      <div class="col col-12 col-md-4">
+        <div class="card card-col" [@cardAnimation1]>
+          <div class="card-header">Title 1</div>
+          <div class="card-metrics">Something</div>
+        </div>
+      </div>
+      <div class="col col-12 col-md-4">
+        <div class="card card-col" [@cardAnimation1]>
+          <div class="card-header">Title 2</div>
+          <div class="card-metrics">Something</div>
+        </div>
+      </div>
+      <div class="col col-12 col-md-4">
+        <div class="card card-col" [@cardAnimation1]>
+          <div class="card-header">Title 3</div>
+          <div class="card-metrics">Something</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="chart-row">
+  <div class="container-fluid">
+    <div class="row chart-row-inside">
+      <div class="col col-12 col-md-6">
+        <div class="card chart-container" [@cardAnimation1]>
+          <div class="card-header">
+            <span class="text">
+               Academic Progress chart
+            </span>
+          </div>
+          <dashboard-chart></dashboard-chart>
+        </div>
+      </div>
+      <div class="col col-12 col-md-6">
+        <!-- <div class="card chart-container">
+          <div class="card-header">Chart 2</div>
+           -->
+          <div class="card table-wrapper" [@cardAnimation2]>
+              <h4 class="heading">Students Requiring Attention</h4>
+              <table class="table">
+                <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Roll number</th>
+                      <th>Department</th>
+                      <th>Status</th>
+                  </tr>
+                  
+                </thead>
+                <tbody>
+                  <tr class="cursor-pointer">
+                      <td >
+                       <!--  <img class="profile-image" *ngIf="student?.student_gender == 'M'" src="assets/icons/student-m.svg"> -->
+                        <img class="profile-image"  src="assets/icons/student-g.svg">
+                         Panini Bakshi
+                      </td>
+                      <td>756119</td>
+                      <td>CSE</td>
+                     
+                      <td>
+                          <span class="badge status-dropout" >dropout</span>
+                          <!-- <span class="badge status-{{student?.prediction}}" *ngIf="student.prediction">{{student?.prediction}}</span> -->
+               
+                      </td>
+                  </tr>  
+                  <tr class="cursor-pointer">
+                      <td >
+                       <!--  <img class="profile-image" *ngIf="student?.student_gender == 'M'" src="assets/icons/student-m.svg"> -->
+                        <img class="profile-image"  src="assets/icons/student-m.svg">
+                        Prashanth Mahesh
+                      </td>
+                      <td>756129</td>
+                      <td>CSE</td>
+                     
+                      <td>
+                          <span class="badge status-dropout" >dropout</span>
+                          <!-- <span class="badge status-{{student?.prediction}}" *ngIf="student.prediction">{{student?.prediction}}</span> -->
+               
+                      </td>
+                  </tr>  
+                  <tr class="cursor-pointer">
+                      <td >
+                       <!--  <img class="profile-image" *ngIf="student?.student_gender == 'M'" src="assets/icons/student-m.svg"> -->
+                        <img class="profile-image"  src="assets/icons/student-m.svg">
+                        Ranjan Ojha
+                      </td>
+                      <td>756139</td>
+                      <td>CSE</td>
+                     
+                      <td>
+                          <span class="badge status-dropout" >dropout</span>
+                          <!-- <span class="badge status-{{student?.prediction}}" *ngIf="student.prediction">{{student?.prediction}}</span> -->
+               
+                      </td>
+                  </tr>  
+                  <tr class="cursor-pointer">
+                      <td >
+                       <!--  <img class="profile-image" *ngIf="student?.student_gender == 'M'" src="assets/icons/student-m.svg"> -->
+                        <img class="profile-image"  src="assets/icons/student-g.svg">
+                        Seetha Kumar
+                      </td>
+                      <td>756149</td>
+                      <td>CSE</td>
+                     
+                      <td>
+                          <span class="badge status-dropout" >dropout</span>
+                          <!-- <span class="badge status-{{student?.prediction}}" *ngIf="student.prediction">{{student?.prediction}}</span> -->
+               
+                      </td>
+                  </tr>  
+                  <tr class="cursor-pointer">
+                      <td >
+                       <!--  <img class="profile-image" *ngIf="student?.student_gender == 'M'" src="assets/icons/student-m.svg"> -->
+                        <img class="profile-image"  src="assets/icons/student-m.svg">
+                        Sunil Dhananjay
+                      </td>
+                      <td>756100</td>
+                      <td>CSE</td>
+                     
+                      <td>
+                          <span class="badge status-dropout" >dropout</span>
+                          <!-- <span class="badge status-{{student?.prediction}}" *ngIf="student.prediction">{{student?.prediction}}</span> -->
+               
+                      </td>
+                  </tr> 
+                </tbody>
+              </table>
+            </div>
+
+  <!--       </div>
+      </div> -->
+    </div>
+  </div>
+</div>

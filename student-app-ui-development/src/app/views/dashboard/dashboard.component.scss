@@ -1,0 +1,92 @@
+.card-header {
+    font-size: 16px;
+    margin-bottom: 5px;
+    background: #fff;
+    padding: 0px 0px;
+    margin-top: 1.1rem;
+    padding-bottom: 1.0rem;
+    .text{
+        padding: 5px 15px;
+        border-left: 2px solid #fab63e;
+    }
+}
+.card-body{
+
+}
+
+.card-metrics {
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.card-row-inside {
+    padding-top: 30px;
+    .col-md-4 {
+        padding-left: 0px !important;
+        padding-right: 30px !important;
+    }
+    .col-md-4:first-child {
+        padding-left: 30px !important;
+    }
+}
+
+.chart-row-inside {
+    padding-top: 30px;
+    .col-md-6 {
+        padding-left: 0px !important;
+        padding-right: 30px !important;
+    }
+    .col-md-6:first-child {
+        padding-left: 30px !important;
+    }
+}
+
+.chart-container {
+    min-height: 350px !important;
+}
+
+.profile-navbar{
+    background: #30384c;
+    .profile-tabs{
+        display: flex;
+        align-items: center;
+        .tabs-holder{
+            display: flex;
+            margin-bottom: 0;
+            .tab{
+                display: inline-block;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 70px;
+                padding: 0 15px;
+                cursor: pointer;
+                a{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    width: 100%;
+                    text-transform: uppercase;
+                    border-bottom: 2px solid transparent;
+                    transition: 200ms ease-out;
+                    font-size: 13px;
+                    color: #fff;
+                    text-decoration: none;
+                    &:hover{
+                        border-bottom: 2px solid #fab63f;
+                        transition: 200ms ease-in;
+                    }
+                    &.selected{
+                        border-bottom: 2px solid #fab63f;
+                    }
+                }
+            }
+        }
+    }
+}
+.align-center{
+    text-align: center;
+}

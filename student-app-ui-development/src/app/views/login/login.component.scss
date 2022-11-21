@@ -1,0 +1,72 @@
+.login-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .pull-up{
+        margin-top: -40px;
+    }
+
+    .login-card{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .header{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            img{
+                height: 70px;
+                width: auto;
+            }
+            h4,h6{
+                text-transform: uppercase;
+                color: #777777;
+            }
+            h5{
+                text-transform: uppercase;
+                color: #999999;
+                font-weight: 300;
+            }
+            .prophecy{
+                font-weight: 400;
+                font-size: 14px;
+                color: #d4d4d4;
+                letter-spacing: 2px;
+            }
+        }
+        .card-body{
+            width: 100%;
+            .field-group{
+                display: flex;
+                flex-direction: column;
+             //   padding: 10px 40px;
+                .input-label{
+
+                }
+                .input-field{
+                    
+                    padding: 7px 14px;
+                    border-radius: 4px;
+                    box-shadow: none;
+                    border: 1px solid #ced4da;
+                    outline: none;
+                    color: #454545;
+                    font-weight: 400;
+                    transition: border 200ms ease-in-out;
+                    &:focus{
+                        border: 1px solid #0097e6;
+                        transition: border 200ms ease-in-out;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+.title{
+    letter-spacing: 2px;
+}

@@ -1,0 +1,294 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 pl-0 pr-0">
+            <div class="profile-banner">
+                <div class="buttons-holder">
+                    <button class="button check button-normal" data-toggle="modal" data-target="#largeModal" (click)="showPrediction();generateValues()">
+            Analyze
+          </button>
+                    <button class="button button-normal" data-toggle="modal" data-target="#historyModal" (click)="viewHistory()">
+              View History
+          </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="!isLoaded">
+        <div class="loader">
+            <img src="assets/loader-heavy.svg" height="70" width="auto" />
+        </div>
+    </ng-container>
+    <ng-container *ngIf="isLoaded">
+
+
+        <div class="row profile-navbar">
+            <div class="col-md-8 ml-auto">
+                <div class="profile-tabs">
+                    <ul class="tabs-holder">
+                        <li class="tab" (click)="switchTab('tab1')">
+                            <a [class.selected]="currentTab == 'tab1'">Semester-Scores</a>
+                        </li>
+                        <li class="tab" (click)="switchTab('tab2')">
+                            <a [class.selected]="currentTab == 'tab2'">Student-Interests</a>
+                        </li>
+                        <li class="tab" (click)="switchTab('tab3')">
+                            <a [class.selected]="currentTab == 'tab3'">Teacher-Inputs</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mb-4">
+            <div class="col-md-4 pl-5">
+              <div class="row">
+                <div class="col-12">
+                    <div class="card profile-card pull-up" [@cardAnimation1]="isLoaded">
+
+                        <div class="profile-image mb-3">
+                            <img *ngIf="profileDetails?.student_gender == 'M'" src="assets/icons/student.svg" />
+                            <img *ngIf="profileDetails?.student_gender == 'F'" src="assets/icons/student.svg" />
+                        </div>
+                        <div class="name">
+                            <span>{{profileDetails?.student_first_name}} {{profileDetails?.student_last_name}}</span>
+                        </div>
+                        <div class="roll-number">
+                            <span>{{profileDetails?.student_regno}}</span>
+                        </div>
+                        <div class="department">
+                            <span>{{profileDetails?.student_department}}</span>
+                        </div>
+                        <div class="email">
+                            <span>{{profileDetails?.student_email}}</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="suggestionResult && studentQuestions[0]['question_answer'] !=null" [@cardAnimation2]>
+                  <div class="col-12">
+                      <div class="card profile-card suggestion-card mt-3" [@cardAnimation1]="isLoaded">
+                        <h4 class="header">
+                          Student analysis profile
+                        </h4>
+                        <div class="suggestion-row" *ngFor = "let data of suggestions">
+                            <div class="progress-bar">
+                                <okr-progress-bar-circle [setAbandon]="false" [setValue]="data.score" [size]="40"></okr-progress-bar-circle>
+                            </div>
+                            <div class="content">
+                              {{data?.field}}
+                            </div>
+                        </div>
+                        <div class="result-row">
+                          <span></span>
+                            <h5 class="{{suggestionResult}}">{{suggestionResult}}</h5>
+                          <ng-container *ngIf="suggestionResult == 'DropOut'">
+                              Learn about other fields which interests you.<br>
+                              Talk to the necessary faculties in case they can help you understand in a way you like to learn the concepts.
+                          </ng-container>
+                          <ng-container *ngIf="suggestionResult == 'Job'">
+                              Learn certain basic concepts in your technical side like data structures which help you in a long run.
+                          </ng-container>
+                          <ng-container *ngIf="suggestionResult == 'PG'">
+                              We can't choose where we come from but we can choose where we go from there.<br>
+Do not go where the path may lead, go instead where there is no path and leave a trail.
+                          </ng-container>
+                          
+                        </div>
+
+                          
+                      </div>
+                  </div>
+                </div>
+                
+            </div>
+
+            <div class="col-md-8">
+                <ng-container *ngIf="currentTab == 'tab1'">
+                    <div class="row" *ngFor="let semester of semesterDetails" [@cardAnimation3]>
+                        <div class="col-md-12">
+                            <div class="card table-wrapper mt-4">
+                                <h4 class="heading">Semester {{semester?.semester}}</h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject name</th>
+                                            <th>Code</th>
+                                            <th>Marks</th>
+
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let mark of semester?.semester_details">
+                                            <td class="subject-name-col">
+                                                <!-- <img class="profile-image" src="assets/icons/student.svg"> -->
+                                                <!--  {{mark?.subject_name}} -->
+                                                <span *ngIf="mark?.subject_name=='dbms'">Database Management Systems</span>
+                                                <span *ngIf="mark?.subject_name=='os'">Operating Systems</span>
+                                                <span *ngIf="mark?.subject_name=='algo'">Algorithms</span>
+                                                <span *ngIf="mark?.subject_name=='oops'">Object Oriented Programming</span>
+
+                                                <span *ngIf="mark?.subject_name=='data structures'">Object Oriented Analysis & Design</span>
+                                                <span *ngIf="mark?.subject_name=='data mining'">Data Mining</span>
+                                                <span *ngIf="mark?.subject_name=='networks'">Networking systems</span>
+                                                <span *ngIf="mark?.subject_name=='microprocessors'">Microprocessors</span>
+                                            </td>
+                                            <td>{{mark?.subject_code}}</td>
+                                            <td>{{mark?.subject_marks}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="currentTab == 'tab2'" [@loopAnimation]="questions.length">
+                    <p class="incomplete_message" *ngIf="((userRole=='teacher' || userRole=='institute' || userRole=='undefined') && !(questions[0].question_answer))">Student Analysis Incomplete</p>
+                    <div *ngIf="!((userRole=='teacher' || userRole=='institute' || userRole=='undefined') && !(questions[0].question_answer))">
+                        <div class="row" *ngFor="let question of questions" [@cardAnimation1]>
+                            <div class="col-10 ml-auto mr-auto">
+                                <div class="card question-wrapper mt-4">
+                                    <h4 class="heading">{{question?.question_description}}</h4>
+                                    <div class="button-holder mt-2 mb-3">
+                                        <button [disabled]="(userRole=='teacher' || userRole=='institute' || userRole=='undefined')" class="button button-no mr-3 {{question?.question_answer == 'no' ? 'selected' : 'null'}}" (click)="saveAnswer('no',question);generateValues()">No</button>
+                                        <button [disabled]="(userRole=='teacher' || userRole=='institute' || userRole=='undefined')" class="button button-yes {{question?.question_answer == 'yes' ? 'selected' : 'null'}}" (click)="pushNewQuestion('yes',question);generateValues()">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                </ng-container>
+
+                <ng-container *ngIf="currentTab == 'tab3'" [@loopAnimation]="questions_teacher.length">
+                    <p class="incomplete_message" *ngIf="((userRole=='student' || userRole=='institute' || userRole=='undefined') && !(questions_teacher[0].question_answer))">Teacher Analysis Incomplete</p>
+                    <div *ngIf="!((userRole=='student' || userRole=='institute' || userRole=='undefined') && !(questions_teacher[0].question_answer))">
+                        <div class="row" *ngFor="let question of questions_teacher" [@cardAnimation1]>
+                            <div class="col-10 ml-auto mr-auto">
+                                <div class="card question-wrapper mt-4">
+                                    <h4 class="heading">{{question?.question_description}}</h4>
+                                    <div class="button-holder mt-2 mb-3">
+                                        <button [disabled]="(userRole=='student' || userRole=='institute' || userRole=='undefined')" class="button button-no mr-3 {{question?.question_answer == 'no' ? 'selected' : 'null'}}" (click)="saveTeacherAnswer('no',question)">No</button>
+                                        <button [disabled]="(userRole=='student' || userRole=='institute' || userRole=='undefined')" class="button button-yes {{question?.question_answer == 'yes' ? 'selected' : 'null'}}" (click)="pushNewTeacherQuestion('yes',question)">Yes</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Analyzing performance and psychometrics</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <!-- <h3>Modal Body</h3> -->
+                <span class="mb-3" *ngIf="progressStage1">Analyzing student marks...</span>
+                <span class="mb-3" *ngIf="progressStage2">Analyzing student interests...</span>
+                <span class="mb-3" *ngIf="progressStage3">Analyzing teacher feedbacks...</span>
+                <span class="mb-3" *ngIf="progressStage4">Here is your result:</span>
+                <img *ngIf="progressStage4" src="assets/icons/idea.svg" class="mt-3" height="80" width="auto" />
+                <h4 *ngIf="progressStage4" class="predicted-course-text mt-2">{{predictedCourse}}</h4>
+                <span class="mb-3 quote" *ngIf="progressStage4">
+          <ng-container *ngIf="predictedCourse == 'Artificial Intelligence'">
+              With artificial intelligence we are summoning the devil
+          </ng-container>
+          <ng-container *ngIf="predictedCourse == 'Animation'">
+              The limits of the possible can only be defined by going beyond them into the impossible
+          </ng-container>
+          <ng-container *ngIf="predictedCourse == 'Cyber Security'">
+              There are only two types of companies:those that are hacked, and those that will be
+          </ng-container>
+          <ng-container *ngIf="predictedCourse == 'Software Developer'">
+              A code that cannot be developed does not exist
+          </ng-container>
+        </span>
+                <img *ngIf="!progressStage4" src="assets/loader-heavy.svg" height="100" width="auto" />
+            </div>
+            <div class="modal-footer">
+                <span class="report" *ngIf="flag">Analysis report with feedbacks has been sent to your email!</span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">History of Predictions</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <!-- <h3>Modal Body</h3> -->
+                <div class="row" [@cardAnimation3]>
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Prediction Date</th>
+                                    <th>Prediction Status</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let prediction of predictionDetails">
+                                    <td class="subject-name-col">
+                                        <!-- <img class="profile-image" src="assets/icons/student.svg"> -->
+                                        <!--  {{mark?.subject_name}} -->
+                                        <span>{{prediction?.date}}</span>
+                                    </td>
+                                    <td> <span class="badge status-{{prediction?.status}}" *ngIf="prediction?.status">{{prediction?.status}}</span>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Did we predict accurately for you?</span>
+                    </div>
+                    <div class="col-md-8 button-row">
+                        <button class="button custom-btn yes" data-dismiss="modal" (click)="showSuccess()">
+                                    Yes
+                                  </button>
+                        <button class="button custom-btn no" data-dismiss="modal" (click)="showFailure()">
+                                    No
+                                  </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
